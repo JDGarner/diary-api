@@ -1,17 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const index = require('./routes/index');
+const queries = require('./queries');
 
 dotenv.config();
 
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: '*',
 }));
 
-app.use(process.env.ROUTE_PATH || '/', index);
+const routePath = process.env.ROUTE_PATH || '/';
+
+app.get(`${routePath}/entries`, queries.getAllEntries);
+app.get(`${routePath}/entries/:id`, queries.getEntry);
 
 const port = process.env.PORT || '3000';
 

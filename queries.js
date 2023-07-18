@@ -12,7 +12,7 @@ function getAllEntries(req, res, next) {
 }
 
 function getEntry(req, res, next) {
-  var entryId = parseInt(req.params.id);
+  const entryId = parseInt(req.params.id);
 
   pool.query('SELECT * FROM entries WHERE id = $1', entryId)
     .then(function (data) {
@@ -25,6 +25,6 @@ function getEntry(req, res, next) {
 }
 
 module.exports = {
-  getAllEntries: getAllEntries,
-  getEntry: getEntry
+  getAllEntries,
+  getEntry
 };
